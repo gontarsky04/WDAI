@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kolorowe Kwadraty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container1 {
+            display: grid;
+            grid-template-columns: repeat(2, 100px); /* Dwie kolumny dla wiersza 1 */
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .container2 {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .square, .img-replacement {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container1">
+        <div class="square" style="background-color: red;"></div>
+        <div class="square" style="background-color: blue;"></div>
+    </div>
+    <div class="container2">
+        <div class="square" style="background-color: green;"></div>
+        <div class="square" style="background-color: yellow;"></div>
+        <img src="gandalf.jpg" alt="O kurde, czarodziej" class="img-replacement">
+    </div>
+</body>
+</html>
