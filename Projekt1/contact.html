@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="64x64" href="pictures/ring_up.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase&display=swap" rel="stylesheet">
+</head>
+<body>
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="author.html">Author</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li style="float:right; margin-right: 10px;"><a class="active" href="contact.html">Contact us</a></li>
+    </ul>
+    <br>
+    <br><br>
+    <div class="contact-form">
+        <h2>Contact Form</h2>
+        <form action="submit_form.php" method="post">
+            <label for="email">E-Mail:</label>
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="subject">Topic:</label>
+            <select id="subject" name="subject" required>
+                <option value="">Select topic</option>
+                <option value="pytanie">Question</option>
+                <option value="opinia">Opinion</option>
+                <option value="reklamacja">Complaint</option>
+            </select>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
+            <input type="submit" value="Send">
+        </form>
+    </div>
+    <footer>
+        <p>Michał Gontarz</p>
+    </footer>
+</body>
+</html>
