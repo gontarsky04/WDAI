@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela z Danymi API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .kontrolki {
+            margin-bottom: 20px;
+        }
+        input, select {
+            padding: 10px;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        img {
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabela z Danymi API</h1>
+    <div class="kontrolki">
+        <input type="text" id="filtr" placeholder="Filtruj po tytule lub opisie">
+        <select id="sortowanie">
+            <option value="domyślnie">Kolejność domyślna</option>
+            <option value="rosnąco">Rosnąco</option>
+            <option value="malejąco">Malejąco</option>
+        </select>
+    </div>
+    <table id="tabela-danych">
+        <thead>
+            <tr>
+                <th>Obraz</th>
+                <th>Tytuł</th>
+                <th>Cena</th>
+                <th>Opis</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const adresApi = 'https://dummyjson.com/products';
+        const poleFiltru = document.getElementById('filtr');
+        const listaSortowania = document.getElementById('sortowanie');
+        const tabelaWiersze = document.querySelector('#tabela-danych tbody');
+
+        let daneOryginalne = [];
+        let daneWidoczne = [];
+
+        async function pobierzDane() {
+            try {
+                const odpowiedź = await fetch(adresApi);
+                const dane = await odpowiedź.json();
+                daneOryginalne = dane.products.slice(0, 30);
+                daneWidoczne = [...daneOryginalne];
+                renderujTabele(daneWidoczne);
+            } catch (błąd) {
+                console.error('Błąd podczas pobierania danych:', błąd);
+            }
+        }
+
+        function renderujTabele(dane) {
+            tabelaWiersze.innerHTML = '';
+            if (dane.length === 0) {
+                tabelaWiersze.innerHTML = '<tr><td colspan="4" style="text-align: center;">Nie znaleziono produktów</td></tr>';
+                return;
+            }
+            dane.forEach(produkt => {
+                const wiersz = `
+                    <tr>
+                        <td><img src="${produkt.thumbnail}" alt="${produkt.title}"></td>
+                        <td>${produkt.title}</td>
+                        <td>${produkt.price}</td>
+                        <td>${produkt.description}</td>
+                    </tr>
+                `;
+                tabelaWiersze.insertAdjacentHTML('beforeend', wiersz);
+            });
+        }
+
+        function filtrujDane() {
+            const zapytanie = poleFiltru.value.toLowerCase().trim();
+            daneWidoczne = daneOryginalne.filter(produkt =>
+                produkt.title.toLowerCase().includes(zapytanie) ||
+                produkt.description.toLowerCase().includes(zapytanie)
+            );
+            sortujDane();
+        }
+
+        function sortujDane() {
+            const opcjaSortowania = listaSortowania.value;
+            if (opcjaSortowania === 'rosnąco') {
+                daneWidoczne.sort((a, b) => a.title.localeCompare(b.title));
+            } else if (opcjaSortowania === 'malejąco') {
+                daneWidoczne.sort((a, b) => b.title.localeCompare(a.title));
+            } else {
+                daneWidoczne = daneOryginalne.filter(produkt =>
+                    produkt.title.toLowerCase().includes(poleFiltru.value.toLowerCase()) ||
+                    produkt.description.toLowerCase().includes(poleFiltru.value.toLowerCase())
+                );
+            }
+            renderujTabele(daneWidoczne);
+        }
+
+        poleFiltru.addEventListener('input', filtrujDane);
+        listaSortowania.addEventListener('change', sortujDane);
+
+        pobierzDane();
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+        }
+        .stoper {
+            background: #ffffff;
+            border: 2px solid #008cba;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            text-align: center;
+            width: 300px;
+        }
+        .czas {
+            font-size: 2.5rem;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        .przyciski {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        button {
+            flex: 1;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+        button#start {
+            background: #28a745;
+        }
+        button#stop {
+            background: #dc3545;
+        }
+        button#reset {
+            background: #ffc107;
+            color: #333333;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="stoper">
+        <div class="czas" id="czas">0s</div>
+        <div class="przyciski">
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        let sekundy = 0;
+        let interwal = null;
+
+        const elementCzas = document.getElementById("czas");
+        const przyciskStart = document.getElementById("start");
+        const przyciskStop = document.getElementById("stop");
+        const przyciskReset = document.getElementById("reset");
+
+        function aktualizujCzas() {
+            if (sekundy < 60) {
+                elementCzas.textContent = `${sekundy}s`;
+            } else {
+                const minuty = Math.floor(sekundy / 60);
+                const pozostaleSekundy = sekundy % 60;
+                elementCzas.textContent = `${minuty}min ${pozostaleSekundy}s`;
+            }
+        }
+
+        przyciskStart.addEventListener("click", () => {
+            if (interwal) return;
+            interwal = setInterval(() => {
+                sekundy++;
+                aktualizujCzas();
+            }, 1000);
+        });
+
+        przyciskStop.addEventListener("click", () => {
+            clearInterval(interwal);
+            interwal = null;
+        });
+
+        przyciskReset.addEventListener("click", () => {
+            clearInterval(interwal);
+            interwal = null;
+            sekundy = 0;
+            aktualizujCzas();
+        });
+    </script>
+</body>
+</html>
