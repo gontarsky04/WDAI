@@ -99,7 +99,7 @@ function drawGameOverScreen() {
     ctx.font = "80px Arial";
     ctx.fillStyle = "white";
     ctx.textAlign = "center";
-    ctx.fillText("Koniec gry!", canvas.width / 2, canvas.height / 2 - 100);
+    ctx.fillText("Koniec gry  :3", canvas.width / 2, canvas.height / 2 - 100);
     ctx.fillText(`Twój wynik: ${score}`, canvas.width / 2, canvas.height / 2);
     ctx.fillStyle = "#FF5733";
     const buttonX = canvas.width / 2 - 150;
@@ -220,7 +220,12 @@ canvas.addEventListener("click", (event) => {
         }
     });
     if (!hit) {
+        if(score == 0) {
+            score = 0
+        }
+        else {
         score -= 5;
+        }
     }
 });
 

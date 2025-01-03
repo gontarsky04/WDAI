@@ -29,7 +29,7 @@
             text-align: left;
         }
         th {
-            background-color: #007bff;
+            background-color: gold;
             color: white;
         }
         img {
@@ -52,7 +52,6 @@
             <tr>
                 <th>Obraz</th>
                 <th>Tytuł</th>
-                <th>Cena</th>
                 <th>Opis</th>
             </tr>
         </thead>
@@ -83,7 +82,7 @@
         function renderujTabele(dane) {
             tabelaWiersze.innerHTML = '';
             if (dane.length === 0) {
-                tabelaWiersze.innerHTML = '<tr><td colspan="4" style="text-align: center;">Nie znaleziono produktów</td></tr>';
+                tabelaWiersze.innerHTML = '<tr><td colspan="3" style="text-align: center;">Nie znaleziono produktów</td></tr>';
                 return;
             }
             dane.forEach(produkt => {
@@ -91,7 +90,6 @@
                     <tr>
                         <td><img src="${produkt.thumbnail}" alt="${produkt.title}"></td>
                         <td>${produkt.title}</td>
-                        <td>${produkt.price}</td>
                         <td>${produkt.description}</td>
                     </tr>
                 `;
