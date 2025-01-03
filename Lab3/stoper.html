@@ -6,41 +6,43 @@
     <title>Stoper</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f0f8ff;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            color: #ffffff;
         }
         .stoper {
-            background: #ffffff;
-            border: 2px solid #008cba;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            padding: 30px 40px;
             text-align: center;
-            width: 300px;
+            width: 320px;
         }
         .czas {
-            font-size: 2.5rem;
-            color: #333333;
+            font-size: 3rem;
+            font-weight: bold;
             margin-bottom: 20px;
+            color: #00e676;
         }
         .przyciski {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             gap: 10px;
         }
         button {
             flex: 1;
-            padding: 10px;
-            font-size: 1rem;
+            padding: 15px;
+            font-size: 1.2rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            color: #ffffff;
+            transition: transform 0.2s, opacity 0.3s;
         }
         button#start {
             background: #28a745;
@@ -53,6 +55,7 @@
             color: #333333;
         }
         button:hover {
+            transform: scale(1.1);
             opacity: 0.9;
         }
     </style>
