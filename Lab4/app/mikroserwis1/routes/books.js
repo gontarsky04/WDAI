@@ -1,6 +1,5 @@
 const express = require("express");
 const bookService = require("../services/bookService");
-const { authenticateToken } = require("../../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -26,7 +25,7 @@ router.get("/api/books/:bookId", async (req, res) => {
     }
 });
 
-router.post("/api/books", authenticateToken, async (req, res) => {
+router.post("/api/books", async (req, res) => {
     const { name, author, year } = req.body;
     if (!name || !author || !year) {
         return res.status(400).send("Brak wymaganych danych wejściowych.");
@@ -39,7 +38,7 @@ router.post("/api/books", authenticateToken, async (req, res) => {
     }
 });
 
-router.post("/api/books/bulk", authenticateToken, async (req, res) => {
+router.post("/api/books/bulk", async (req, res) => {
     const books = req.body;
     try {
         const createdBooks = await bookService.addBooksInBulk(books);
@@ -49,7 +48,7 @@ router.post("/api/books/bulk", authenticateToken, async (req, res) => {
     }
 });
 
-router.delete("/api/books/:bookId", authenticateToken, async (req, res) => {
+router.delete("/api/books/:bookId", async (req, res) => {
     const bookId = req.params.bookId;
 
     try {

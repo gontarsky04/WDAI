@@ -1,0 +1,40 @@
+### Pobranie wszystkich książek
+GET http://localhost:3001/api/books
+###
+
+### Dodanie nowej książki
+POST http://localhost:3001/api/books
+Content-Type: application/json
+
+{
+  "name": "Tup2",
+  "author": "me2",
+  "year": 2025
+}
+###
+
+### Pobranie książki o konkretnym ID
+GET http://localhost:3001/api/books/38
+###
+
+### Dodanie wielu książek
+POST http://localhost:3001/api/books/bulk
+Content-Type: application/json
+
+[
+  {
+    "name": "Book 1",
+    "author": "Author 1",
+    "year": 2020
+  },
+  {
+    "name": "Book 2",
+    "author": "Author 2",
+    "year": 2021
+  }
+]
+###
+
+### Usunięcie książki o konkretnym ID
+DELETE http://localhost:3001/api/books/40
+###
