@@ -1,0 +1,26 @@
+### Pobranie zamówień użytkownika po ID
+GET http://localhost:3002/api/orders/2
+
+###
+POST http://localhost:3002/api/orders
+Content-Type: application/json
+
+{
+  "userId": "26666",
+  "bookId": "4",
+  "quantity": 2,
+  "createdAt": "2024-12-10T17:20:37.579Z",
+  "updatedAt": "2024-12-10T17:20:37.579Z"
+}
+
+###
+DELETE http://localhost:3002/api/orders/9
+
+###
+PATCH http://localhost:3002/api/orders/1
+Content-Type: application/json
+
+{
+  "quantity": 3
+}
+

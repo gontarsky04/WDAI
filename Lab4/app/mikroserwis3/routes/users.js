@@ -1,6 +1,5 @@
 const express = require("express");
 const userService = require("../services/userService");
-const { authenticateToken } = require("../../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -27,15 +26,15 @@ router.post("/api/login", async (req, res) => {
     }
 
     try {
-        const { token } = await userService.loginUser(email, password);
-        res.json({ token });
+        const user = await userService.loginUser(email, password);
+        res.json({ message: "Zalogowano pomyślnie", user });
     } catch (error) {
         res.status(401).send(error.message);
     }
 });
 
-router.get("/api/profile", authenticateToken, async (req, res) => {
-    const userId = req.user.userId;
+router.get("/api/profile/:userId", async (req, res) => {
+    const userId = req.params.userId;
 
     try {
         const user = await userService.getUserProfile(userId);

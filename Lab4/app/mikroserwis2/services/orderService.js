@@ -24,17 +24,29 @@ const getOrderByUserID = async (userId) => {
 const addOrder = async (orderData) => {
     const { userId, bookId, quantity } = orderData;
 
+    console.log("Dodawanie zamówienia z danymi:", orderData);
+
     const book = await getBookByID(bookId);
     if (!book) {
+        console.error("Książka o podanym ID nie istnieje:", bookId);
         throw new Error("Książka o podanym ID nie istnieje.");
     }
 
-    return await Order.create({
-        userId: userId,
-        bookId: bookId,
-        quantity: quantity,
-    });
+    try {
+        const newOrder = await Order.create({
+            userId: userId,
+            bookId: bookId,
+            quantity: quantity,
+        });
+
+        console.log("Pomyślnie dodano zamówienie:", newOrder);
+        return newOrder;
+    } catch (error) {
+        console.error("Błąd podczas tworzenia zamówienia:", error.message);
+        throw error;
+    }
 };
+
 
 const deleteOrder = async (orderId) => {
     const rowsDeleted = await Order.destroy({
